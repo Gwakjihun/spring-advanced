@@ -1,5 +1,6 @@
 package org.example.expert.domain.user.controller;
 
+import jakarta.validation.Valid; // @Valid import
 import lombok.RequiredArgsConstructor;
 import org.example.expert.domain.common.annotation.Auth;
 import org.example.expert.domain.common.dto.AuthUser;
@@ -21,7 +22,9 @@ public class UserController {
     }
 
     @PutMapping("/users")
-    public void changePassword(@Auth AuthUser authUser, @RequestBody UserChangePasswordRequest userChangePasswordRequest) {
+    public void changePassword(
+            @Auth AuthUser authUser,
+            @Valid @RequestBody UserChangePasswordRequest userChangePasswordRequest) { // @Valid 추가
         userService.changePassword(authUser.getId(), userChangePasswordRequest);
     }
 }
